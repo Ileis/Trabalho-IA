@@ -8,7 +8,7 @@ def breadth_first_search(g: Graph, start: Position, end: Position) -> Path:
     visited: list[list[bool]] = init_visited(g.size)
     queue: deque[Node] = deque()
 
-    def _BFS(r: Node) -> Node | None:
+    def _breadth_first_search(r: Node) -> Node | None:
         nonlocal visited
         nonlocal queue
         nonlocal end
@@ -26,6 +26,6 @@ def breadth_first_search(g: Graph, start: Position, end: Position) -> Path:
                 queue.append(neighbor_node)
 
         # recursive call
-        return _BFS(queue.popleft())
+        return _breadth_first_search(queue.popleft())
 
-    return get_path(_BFS(root))
+    return get_path(_breadth_first_search(root))

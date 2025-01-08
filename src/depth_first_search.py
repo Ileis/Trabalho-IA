@@ -7,7 +7,7 @@ def depth_first_search(g: Graph, start: Position, end: Position) -> Path:
     visited: list[list[bool]] = init_visited(g.size)
     stack: list[Node] = list()
 
-    def _DFS(r: Node) -> Node | None:
+    def _depth_first_search(r: Node) -> Node | None:
         nonlocal visited
         nonlocal stack
         nonlocal end
@@ -25,6 +25,6 @@ def depth_first_search(g: Graph, start: Position, end: Position) -> Path:
                 stack.append(neighbor_node)
 
         # recursive call
-        return _DFS(stack.pop())
+        return _depth_first_search(stack.pop())
 
-    return get_path(_DFS(root))
+    return get_path(_depth_first_search(root))
