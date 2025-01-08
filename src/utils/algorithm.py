@@ -93,4 +93,3 @@ def DFS(g: Graph, start: Position, end: Position) -> Path:
         return _DFS(stack.pop())
 
     return get_path(_DFS(root))
-
