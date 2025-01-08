@@ -28,7 +28,7 @@ def get_path(node: n.Node | None) -> list[tuple[int, int]]:
 
     return output
 
-def BFS (graph: g.Graph, start: tuple[int, int], end: tuple[int, int]) -> list[tuple[int, int]]:
+def BFS(graph: g.Graph, start: tuple[int, int], end: tuple[int, int]) -> list[tuple[int, int]]:
     root: n.Node = n.Node(start, graph.get_moves(start))
     visited: list[list[bool]] = [[False for _ in range(60)] for _ in range(60)]
     queue: deque[n.Node] = deque()
@@ -53,6 +53,4 @@ def BFS (graph: g.Graph, start: tuple[int, int], end: tuple[int, int]) -> list[t
         # recursive call
         return _BFS(queue.popleft())
 
-    last_node = _BFS(root)
-
-    return get_path(last_node)
+    return get_path(_BFS(root))
