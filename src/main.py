@@ -1,6 +1,6 @@
 from Graph import Graph
-from DFS import DFS
-from BFS import breadth_first_search
+from depth_first_search import depth_first_search
+from breadth_first_search import breadth_first_search
 
 SIZE: int = 30
 
@@ -15,7 +15,7 @@ def main() -> None:
     fim: tuple[int, int] = (12, 12)
 
     print(breadth_first_search(graph, inicio, fim))
-    print(DFS(graph, inicio, fim))
+    print(depth_first_search(graph, inicio, fim))
     
 if __name__ == '__main__':
     main()
