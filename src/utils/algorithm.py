@@ -1,10 +1,6 @@
 from collections import deque
 from Node import Node
 from Graph import Graph
-import heapq
-
-# heapq._heapfy_max()
-# heapq._heappop_max()
 
 Position = tuple[int, int]
 Path = list[Position]
