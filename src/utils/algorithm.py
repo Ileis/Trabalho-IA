@@ -1,3 +1,4 @@
+import math
 from collections import deque
 from Node import Node
 from Graph import Graph
@@ -39,3 +40,9 @@ def get_path(n: Node | None) -> Path:
     output.reverse()
 
     return output
+
+def euc(t1: Position, t2: Position) -> float:
+    return math.sqrt(abs(fst(t1) - fst(t2))**2 + abs(scd(t1) - scd(t2))**2)
+
+def man(t1: Position, t2: Position) -> int:
+    return (abs(fst(t1) - fst(t2)) + abs(scd(t1) - scd(t2)))
