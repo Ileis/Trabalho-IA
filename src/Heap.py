@@ -2,15 +2,18 @@ from collections.abc import Callable
 from utils.algorithm import Position
 from Node import Node
 from typing import Any
+
 class Heap:
     harr: list [Any]
     capacity: int
     compare: Callable [[Any, Any], bool]
+
     def __init__(self, compare: Callable[[Any, Any], bool]) -> None:
         self.size = 0
         self.harr = list()
         self.compare = compare
         self.capacity = 1000
+
     def parent(self, i: int) -> int:
         return (i - 1) // 2
     
@@ -56,4 +59,3 @@ class Heap:
         if descend != i:
             self.swap(i, descend)
             self.heapify(descend)
-        pass
