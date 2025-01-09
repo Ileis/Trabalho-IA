@@ -1,30 +1,31 @@
 from collections.abc import Callable
 from utils.algorithm import Position
+from Node import Node
+from typing import Any
 class Heap:
-    harr: list [ Position]
+    harr: list [Any]
     capacity: int
-    compare: Callable [[Position, Position], bool]
-    def __init__(self, capacity: int, compare: Callable[[Position, Position], bool]) -> None:
-        self.capacity = capacity
+    compare: Callable [[Any, Any], bool]
+    def __init__(self, compare: Callable[[Any, Any], bool]) -> None:
         self.size = 0
         self.harr = list()
         self.compare = compare
-
+        self.capacity = 1000
     def parent(self, i: int) -> int:
         return (i - 1) // 2
     
-    def get_head(self) -> Position:
+    def get_head(self) -> Any:
         return self.harr[0]
     
-    def extract_head(self) -> Position:
+    def extract_head(self) -> Node | None:
         if self.size == 0:
-            return (-1,-1)
+            return
         
         if self.size == 1:
             self.size = 0
             return self.harr.pop()
         
-        root: tuple [int,int] = self.harr[0]
+        root: Node = self.harr[0]
         self.harr[0] = self.harr.pop()
         self.size -= 1
         self.heapify(0)
@@ -33,7 +34,7 @@ class Heap:
     def swap(self, i: int, j: int) -> None:
         self.harr[i], self.harr[j] = self.harr[j], self.harr[i]
 
-    def insert(self, k: Position) -> None:
+    def insert(self, k: Node) -> None:
         if self.size == self.capacity:
             return
         
