@@ -20,14 +20,13 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
         # set neighbors
         for move in r.moves:
             neighbor_position: Position = sum_position(r.position, move)
-            h_cost: int = fun_cost(r, neighbor_position)
+            h_cost: int = fun_cost(r, neighbor_position) + r.h
             
             if not is_visited(visited, neighbor_position):
                 set_visited(visited, neighbor_position)
                 neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, h_cost)
                 queue.append(neighbor_node)
 
-        # recursive call
         return _breadth_first_search(queue.popleft())
 
     return get_path(_breadth_first_search(root))

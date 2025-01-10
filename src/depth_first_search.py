@@ -19,14 +19,13 @@ def depth_first_search(g: Graph, start: Position, end: Position, func_cost: Call
         # set neighbors
         for move in r.moves:
             neighbor_position: Position = sum_position(r.position, move)
-            h_cost: int = func_cost(r, neighbor_position)
+            h_cost: int = func_cost(r, neighbor_position) + r.h
 
             if not is_visited(visited, neighbor_position):
                 set_visited(visited, neighbor_position)
                 neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, h_cost)
                 stack.append(neighbor_node)
 
-        # recursive call
         return _depth_first_search(stack.pop())
 
     return get_path(_depth_first_search(root))

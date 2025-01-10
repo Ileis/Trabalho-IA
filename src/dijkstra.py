@@ -14,13 +14,15 @@ def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node,
         nonlocal heap
         nonlocal end
 
+        # print(heap)
+
         if r is None or r.position == end:
             return r
 
         # set neighbors
         for move in r.moves:
             neighbor_position: Position = sum_position(r.position, move)
-            h_cost: int = fun_cost(r, neighbor_position)
+            h_cost: int = fun_cost(r, neighbor_position) + r.h
             
             if not is_visited(visited, neighbor_position):
                 set_visited(visited, neighbor_position)
