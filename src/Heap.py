@@ -7,6 +7,17 @@ class Heap:
     capacity: int
     compare: Callable [[Any, Any], bool]
 
+    def __str__(self) -> str:
+        output: str = "["
+
+        for element in self.harr:
+            output += str(element.h) + ", "
+
+        output = output[:len(output) - 2]
+        output += "]"
+
+        return output
+
     def __init__(self, compare: Callable[[Any, Any], bool]) -> None:
         self.size = 0
         self.harr = list()
