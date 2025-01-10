@@ -36,7 +36,7 @@ class Heap:
     def swap(self, i: int, j: int) -> None:
         self.harr[i], self.harr[j] = self.harr[j], self.harr[i]
 
-    def insert(self, k: Node) -> None:
+    def insert(self, k: Any) -> None:
         if self.size == self.capacity:
             return
         
