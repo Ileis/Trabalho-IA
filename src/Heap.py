@@ -1,5 +1,4 @@
 from typing import Callable, Any, Generic, TypeVar
-from utils.algorithm import Position
 from Node import Node
 
 T = TypeVar("T")

@@ -63,6 +63,7 @@ def cost_2(parent: Node, pos: Position) -> int:
 
     if mov_diff == Moves.UP.value or mov_diff == Moves.DOWN.value: return 10
     if mov_diff == Moves.LEFT.value or mov_diff == Moves.RIGHT.value: return 15
+
     return 0
 
 def cost_3(parent: Node, pos: Position) -> int:

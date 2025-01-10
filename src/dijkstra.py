@@ -1,8 +1,8 @@
 from typing import Callable
 from Graph import Graph
 from Node import Node
-from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path
 from Heap import Heap
+from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path
 
 def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node, Position], int]) -> Path:
     root: Node = Node(start, g.get_moves(start))
