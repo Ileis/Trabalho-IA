@@ -27,7 +27,6 @@ def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node,
                 neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, h_cost)
                 heap.insert(neighbor_node)
 
-        # recursive call
         return _dijkstra(heap.extract_head())
 
     return get_path(_dijkstra(root))

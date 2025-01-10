@@ -14,8 +14,6 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
         nonlocal queue
         nonlocal end
 
-        print(r)
-
         if r is None or r.position == end:
             return r
 
