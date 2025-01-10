@@ -1,3 +1,5 @@
+from utils.algorithm import Moves
+
 class Graph:
 
     size: int
@@ -10,18 +12,18 @@ class Graph:
 
         # up
         if pos[0] < (self.size - 1):
-            output.append((1, 0))
+            output.append(Moves.UP.value)
         
         # right
         if pos[1] < (self.size - 1):
-            output.append((0, 1))
+            output.append(Moves.RIGHT.value)
 
         # down
         if pos[0] > 0:
-            output.append((-1, 0))
+            output.append(Moves.DOWN.value)
 
         # left
         if pos[1] > 0:
-            output.append((0, -1))
+            output.append(Moves.LEFT.value)
 
         return output
