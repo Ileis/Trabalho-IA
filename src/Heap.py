@@ -1,24 +1,26 @@
-from typing import Callable, Any
+from typing import Callable, Any, Generic, TypeVar
 from utils.algorithm import Position
 from Node import Node
 
-class Heap:
-    harr: list [Any]
+T = TypeVar("T")
+
+class Heap(Generic[T]):
+    harr: list [T]
     capacity: int
-    compare: Callable [[Any, Any], bool]
+    compare: Callable [[T, T], bool]
 
     def __str__(self) -> str:
         output: str = "["
 
         for element in self.harr:
-            output += str(element.h) + ", "
+            output += str(element.h if isinstance(element, Node) else element) + ", "
 
         output = output[:len(output) - 2]
         output += "]"
 
         return output
 
-    def __init__(self, compare: Callable[[Any, Any], bool]) -> None:
+    def __init__(self, compare: Callable[[T, T], bool]) -> None:
         self.size = 0
         self.harr = list()
         self.compare = compare
@@ -30,7 +32,7 @@ class Heap:
     def get_head(self) -> Any:
         return self.harr[0]
     
-    def extract_head(self) -> Node | None:
+    def extract_head(self) -> T | None:
         if self.size == 0:
             return
         
@@ -38,7 +40,7 @@ class Heap:
             self.size = 0
             return self.harr.pop()
         
-        root: Node = self.harr[0]
+        root: T = self.harr[0]
         self.harr[0] = self.harr.pop()
         self.size -= 1
         self.heapify(0)
