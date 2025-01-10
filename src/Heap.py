@@ -1,7 +1,6 @@
-from collections.abc import Callable
+from typing import Callable, Any
 from utils.algorithm import Position
 from Node import Node
-from typing import Any
 
 class Heap:
     harr: list [Any]
