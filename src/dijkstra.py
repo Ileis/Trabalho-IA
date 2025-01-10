@@ -7,7 +7,7 @@ from Heap import Heap
 def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node, Position], int]) -> Path:
     root: Node = Node(start, g.get_moves(start))
     visited: list[list[bool]] = init_visited(g.size)
-    heap: Heap = Heap(lambda x, y: x.h <= y.h)
+    heap: Heap[Node] = Heap(lambda x, y: x.h <= y.h)
 
     def _dijkstra(r: Node | None) -> Node | None:
         nonlocal visited
