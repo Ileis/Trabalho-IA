@@ -14,8 +14,6 @@ def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node,
         nonlocal heap
         nonlocal end
 
-        # print(heap)
-
         if r is None or r.position == end:
             return r
 
