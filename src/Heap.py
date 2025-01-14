@@ -48,6 +48,9 @@ class Heap(Generic[T]):
     def swap(self, i: int, j: int) -> None:
         self.harr[i], self.harr[j] = self.harr[j], self.harr[i]
 
+    def empty(self) -> bool:
+        return self.size == 0
+
     def insert(self, k: Any) -> None:
         if self.size == self.capacity:
             return
