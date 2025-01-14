@@ -28,6 +28,12 @@ class Heap(Generic[T]):
     def parent(self, i: int) -> int:
         return (i - 1) // 2
     
+    def find(self, k: T) -> int:
+        for i in range(self.size):
+            if self.harr[i] == k:
+                return i
+        return -1
+    
     def get_head(self) -> Any:
         return self.harr[0]
     
