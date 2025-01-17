@@ -4,9 +4,9 @@ from Node import Node
 from Heap import Heap
 from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path
 
-def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Position], int], fun_h: Callable[[Position, Position], int], **kwarg) -> Path:
+def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Position], int], fun_h: Callable[[Position, Position], int], **kwargs) -> Path:
     """
-    ## kwargs
+    ## **kwargs
     `call`: printa a camada da chamada recursiva
     `parent_node`: printa o no pai da chamada recursiva
     `neighbors`: printa os vizinhos descubertos na busca
@@ -24,12 +24,12 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
         nonlocal end
         nonlocal call
 
-        if kwarg.get("call"):
+        if kwargs.get("call"):
             print(f"call {call}" if call <= 1 else f"\ncall {call}")
         
         call += 1
 
-        if kwarg.get("parent_node"):
+        if kwargs.get("parent_node"):
             print(f"parent_node: {r}")
 
         if r is None or r.position == end:
@@ -46,10 +46,10 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
                 neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, g_cost, h_cost)
                 heap.insert(neighbor_node)
 
-                if kwarg.get("neighbors"):
+                if kwargs.get("neighbors"):
                     print(neighbor_node)
 
-        if kwarg.get("structure_neighbors"):
+        if kwargs.get("structure_neighbors"):
             print(heap)
 
         return _a_star(heap.extract_head())
