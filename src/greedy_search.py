@@ -5,6 +5,12 @@ from utils.algorithm import Position, Path, init_visited, sum_position, is_visit
 
 def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Position], int], fun_h: Callable[[Position, Position], int], **kwarg) -> Path:
     """
+    ## arguments
+    `g`: grafo do tipo Graph
+    `start`: posicao inicial
+    `end`: posicao final
+    `fun_g`: funcao de custo
+    `fun_h`: funcao heuristica
     ## kwargs
     `call`: printa a camada da chamada recursiva
     `parent_node`: printa o no pai da chamada recursiva

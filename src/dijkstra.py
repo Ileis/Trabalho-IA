@@ -4,8 +4,13 @@ from Node import Node
 from Heap import Heap
 from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path
 
-def dijkstra(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Position], int], **kwargs) -> Path:
+def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node, Position], int], **kwargs) -> Path:
     """
+    ## arguments
+    `g`: grafo do tipo Graph
+    `start`: posicao inicial
+    `end`: posicao final
+    `fun_cost`: funcao de custo
     ## **kwargs
     `call`: printa a camada da chamada recursiva
     `parent_node`: printa o no pai da chamada recursiva
@@ -38,7 +43,7 @@ def dijkstra(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Po
         # set neighbors
         for move in r.moves:
             neighbor_position: Position = sum_position(r.position, move)
-            g_cost: int = fun_g(r, neighbor_position) + r.g
+            g_cost: int = fun_cost(r, neighbor_position) + r.g
             
             if not is_visited(visited, neighbor_position):
                 set_visited(visited, neighbor_position)

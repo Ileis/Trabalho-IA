@@ -1,5 +1,4 @@
 from typing import Callable, Any, Generic, TypeVar, Iterator
-from Node import Node
 
 T = TypeVar("T")
 

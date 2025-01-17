@@ -15,19 +15,24 @@ def random_pos() -> tuple[int, int]:
 def main() -> None:
     graph = Graph(SIZE)
 
-    inicio = random_pos()
-    fim = random_pos()
+    start = random_pos()
+    end = random_pos()
 
-    print("start:", inicio)
-    print("end:", fim, end="\n\n")
+    print("start:", start)
+    print("end:", end, end="\n\n")
 
-    # print("dijkstra:", dijkstra(graph, inicio, fim, cost_1), end="\n\n")
-    # print("dijkstra:", dijkstra(graph, inicio, fim, cost_2), end="\n\n")
-    # print("dijkstra:", dijkstra(graph, inicio, fim, cost_3), end="\n\n")
-    # print("dijkstra:", dijkstra(graph, inicio, fim, cost_4), end="\n\n")
-    print("A*:", a_star(graph, inicio, fim, cost_4, euc, call=True, parent_node=True, neighbors=True, structure_neighbors=True), end="\n\n")
-    # print("greedy1:", greedy_search(graph, inicio, fim, cost_1, euc, call=True, parent_node=True, neighbors=True), end="\n\n")
-    # print("greedy2:", greedy_search(graph, inicio, fim, cost_1, man, call=True, parent_node=True, neighbors=True), end="\n\n")
+    print("euclides")
+    print(greedy_search(graph, start, end, cost_1, euc))
+    print(greedy_search(graph, start, end, cost_2, euc))
+    print(greedy_search(graph, start, end, cost_3, euc))
+    print(greedy_search(graph, start, end, cost_4, euc))
+
+    print("manhattan")
+    print(greedy_search(graph, start, end, cost_1, man))
+    print(greedy_search(graph, start, end, cost_2, man))
+    print(greedy_search(graph, start, end, cost_3, man))
+    print(greedy_search(graph, start, end, cost_4, man))
+
 
 if __name__ == '__main__':
     main()

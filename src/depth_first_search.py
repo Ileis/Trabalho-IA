@@ -5,6 +5,11 @@ from utils.algorithm import Position, Path, init_visited, sum_position, is_visit
 
 def depth_first_search(g: Graph, start: Position, end: Position, func_cost: Callable[[Node, Position], bool], **kwargs) -> Path:
     """
+    ## arguments
+    `g`: grafo do tipo Graph
+    `start`: posicao inicial
+    `end`: posicao final
+    `fun_cost`: funcao de custo
     ## **kwargs
     `call`: printa a camada da chamada recursiva
     `parent_node`: printa o no pai da chamada recursiva
