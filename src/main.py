@@ -25,9 +25,9 @@ def main() -> None:
     # print("dijkstra:", dijkstra(graph, inicio, fim, cost_2), end="\n\n")
     # print("dijkstra:", dijkstra(graph, inicio, fim, cost_3), end="\n\n")
     # print("dijkstra:", dijkstra(graph, inicio, fim, cost_4), end="\n\n")
-    # print("A*:", a_star(graph, inicio, fim, cost_4, euc, call=True, parent_node=True, neighbors=True, structure_neighbors=True), end="\n\n")
-    print("greedy1:", greedy_search(graph, inicio, fim, cost_1, euc, call=True, parent_node=True, neighbors=True), end="\n\n")
-    print("greedy2:", greedy_search(graph, inicio, fim, cost_1, man, call=True, parent_node=True, neighbors=True), end="\n\n")
+    print("A*:", a_star(graph, inicio, fim, cost_4, euc, call=True, parent_node=True, neighbors=True, structure_neighbors=True), end="\n\n")
+    # print("greedy1:", greedy_search(graph, inicio, fim, cost_1, euc, call=True, parent_node=True, neighbors=True), end="\n\n")
+    # print("greedy2:", greedy_search(graph, inicio, fim, cost_1, man, call=True, parent_node=True, neighbors=True), end="\n\n")
 
 if __name__ == '__main__':
     main()

@@ -19,4 +19,12 @@ class Node:
             self.height = self.parent.height + 1
 
     def __str__(self) -> str:
-        return f"<pos: {str(self.position)}, h: {self.h}, g: {self.g}>"
+        pos = "(" + ", ".join(f"{x:02}" for x in self.position) + ")"
+        par = "(" + ", ".join(f"{x:02}" for x in self.parent.position) + ")" if self.parent is not None else "(nl, nl)"
+        return f"<pos: {pos}, parent: {par}, h: {self.h}, g: {self.g}>"
+
+    def __format__(self, format_spec: str) -> str:
+        if format_spec == "values":
+            return f"<g: {self.g}, h: {self.h}, t: {self.g + self.h}>"
+        return str(self)
+    

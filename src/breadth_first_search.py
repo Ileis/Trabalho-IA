@@ -50,7 +50,7 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
                     print(neighbor_node)
 
         if kwargs.get("structure_neighbors"):
-            print(queue)
+            print("(" + ", ".join(f"{x:values}" for x in queue) + ")")
 
         return _breadth_first_search(queue.popleft())
 

@@ -49,7 +49,7 @@ def dijkstra(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Po
                     print(neighbor_node)
 
         if kwargs.get("structure_neighbors"):
-            print(heap)
+            print("(" + ", ".join(f"{x:values}" for x in heap) + ")")
 
         return _dijkstra(heap.extract_head())
 

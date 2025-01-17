@@ -1,4 +1,4 @@
-from typing import Callable, Any, Generic, TypeVar
+from typing import Callable, Any, Generic, TypeVar, Iterator
 from Node import Node
 
 T = TypeVar("T")
@@ -7,6 +7,9 @@ class Heap(Generic[T]):
     harr: list [T]
     capacity: int
     compare: Callable [[T, T], bool]
+
+    def __iter__(self) -> Iterator:
+        return iter(self.harr)
 
     def __str__(self) -> str:
         output: str = "["

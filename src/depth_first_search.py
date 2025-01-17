@@ -48,7 +48,7 @@ def depth_first_search(g: Graph, start: Position, end: Position, func_cost: Call
                     print(neighbor_node)
 
         if kwargs.get("structure_neighbors"):
-            print(stack)
+            print("(" + ", ".join(f"{x:values}" for x in stack) + ")")
            
         return _depth_first_search(stack.pop())
 

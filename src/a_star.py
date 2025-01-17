@@ -50,9 +50,8 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
                     print(neighbor_node)
 
         if kwargs.get("structure_neighbors"):
-            print(heap)
+            print("(" + ", ".join(f"{x:values}" for x in heap) + ")")
 
         return _a_star(heap.extract_head())
 
     return get_path(_a_star(root))
-
