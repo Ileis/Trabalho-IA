@@ -3,15 +3,15 @@ class Node:
     moves: list[tuple[int, int]]
     position: tuple[int, int]
     height: int
-    h: int
     g: int
+    h: int
     
-    def __init__(self, position: tuple[int, int], moves: list[tuple[int, int]], parent:'Node | None' = None, h: int = 10, g: int = 0) -> None:
+    def __init__(self, position: tuple[int, int], moves: list[tuple[int, int]], parent:'Node | None' = None, g: int = 10, h: int = 0) -> None:
         self.parent = parent
         self.position = position
         self.moves = moves
-        self.h = h
         self.g = g
+        self.h = h
 
         if self.parent is None:
             self.height = 0
