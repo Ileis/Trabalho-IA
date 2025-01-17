@@ -19,4 +19,4 @@ class Node:
             self.height = self.parent.height + 1
 
     def __str__(self) -> str:
-        return f"pos: {str(self.position)}, parent: {str(self.parent.position if self.parent is not None else None)}, h: {self.h}, g: {self.g}"
+        return f"<pos: {str(self.position)}, h: {self.h}, g: {self.g}>"

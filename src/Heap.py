@@ -12,7 +12,7 @@ class Heap(Generic[T]):
         output: str = "["
 
         for element in self.harr:
-            output += str(element.h if isinstance(element, Node) else element) + ", "
+            output += str(element) + ", "
 
         output = output[:len(output) - 2]
         output += "]"
