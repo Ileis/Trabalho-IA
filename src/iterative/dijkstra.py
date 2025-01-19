@@ -20,7 +20,6 @@ def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node,
 
     root: Node = Node(start, g.get_moves(start))
     visited: list[list[bool]] = init_table(g.size)
-    generated: list[list[bool]] = init_table(g.size)
     heap: Heap[Node] = Heap(lambda x, y: x.g <= y.g)
     it: int = 1
     count_visited: int = 0
@@ -58,10 +57,9 @@ def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node,
             neighbor_position: Position = sum_position(current_node.position, move)
             g_cost: int = fun_cost(current_node, neighbor_position) + current_node.g
             
-            if not (is_true(visited, neighbor_position) or is_true(generated, neighbor_position)):
+            if not is_true(visited, neighbor_position):
                 neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), current_node, g_cost)
                 heap.insert(neighbor_node)
-                set_true(generated, neighbor_position)
                 count_generated += 1
 
                 # debug: generated neighbors
