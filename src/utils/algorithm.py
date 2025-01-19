@@ -1,7 +1,7 @@
 import math
 from enum import Enum
 from Node import Node
-
+from typing import Callable
 Position = tuple[int, int]
 """
 Position[0]: int = coordenada x da posicao
@@ -102,3 +102,14 @@ def cost_4(parent: Node, pos: Position) -> int:
         return 5 + (abs(10 - parent.height + 1) % 11)
 
     return 0
+
+def costs(i:int) -> Callable[[Node, Position], int]:
+    if i == 1:
+        return cost_1
+    if i == 2:
+        return cost_2
+    if i == 3:
+        return cost_3
+    else:
+        return cost_4
+    
