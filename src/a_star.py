@@ -2,7 +2,7 @@ from typing import Callable
 from Graph import Graph
 from Node import Node
 from Heap import Heap
-from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path, reduce, SearchResult
+from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path, SearchResult
 
 def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Position], int], fun_h: Callable[[Position, Position], int], **kwargs) -> SearchResult:
     """
