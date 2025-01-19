@@ -2,9 +2,9 @@ from typing import Callable
 from collections import deque
 from Graph import Graph
 from Node import Node
-from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path
+from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path, SearchResult
 
-def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node, Position], int], **kwargs) -> Path:
+def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node, Position], int], **kwargs) -> SearchResult:
     """
     ## arguments
     `g`: grafo do tipo Graph
@@ -74,4 +74,8 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
 
         return _breadth_first_search(queue.popleft())
 
-    return get_path(_breadth_first_search(root))
+    last_node: Node | None = _breadth_first_search(root)
+    path: Path = get_path(last_node)
+    path_cost = last_node.g if last_node is not None else 0
+
+    return (start, end, path, path_cost, count_generated, count_visited)

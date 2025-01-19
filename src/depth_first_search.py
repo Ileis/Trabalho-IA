@@ -1,9 +1,9 @@
 from typing import Callable
 from Graph import Graph
 from Node import Node
-from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path
+from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path, SearchResult
 
-def depth_first_search(g: Graph, start: Position, end: Position, func_cost: Callable[[Node, Position], bool], **kwargs) -> Path:
+def depth_first_search(g: Graph, start: Position, end: Position, func_cost: Callable[[Node, Position], bool], **kwargs) -> SearchResult:
     """
     ## arguments
     `g`: grafo do tipo Graph
@@ -73,4 +73,8 @@ def depth_first_search(g: Graph, start: Position, end: Position, func_cost: Call
            
         return _depth_first_search(stack.pop())
 
-    return get_path(_depth_first_search(root))
+    last_node: Node | None = _depth_first_search(root)
+    path: Path = get_path(last_node)
+    path_cost = last_node.g if last_node is not None else 0
+
+    return (start, end, path, path_cost, count_generated, count_visited)

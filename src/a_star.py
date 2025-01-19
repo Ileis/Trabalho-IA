@@ -2,9 +2,9 @@ from typing import Callable
 from Graph import Graph
 from Node import Node
 from Heap import Heap
-from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path, SearchResult
+from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path, reduce, SearchResult
 
-def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Position], int], fun_h: Callable[[Position, Position], int], **kwargs) -> Path:
+def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Position], int], fun_h: Callable[[Position, Position], int], **kwargs) -> SearchResult:
     """
     ## arguments
     `g`: grafo do tipo Graph
@@ -76,4 +76,8 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
 
         return _a_star(heap.extract_head())
 
-    return get_path(_a_star(root))
+    last_node: Node | None = _a_star(root)
+    path: Path = get_path(last_node)
+    path_cost = last_node.g if last_node is not None else 0
+
+    return (start, end, path, path_cost, count_generated, count_visited)

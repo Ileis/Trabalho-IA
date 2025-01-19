@@ -1,9 +1,9 @@
 from typing import Callable
 from Graph import Graph
 from Node import Node
-from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path
+from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path, SearchResult
 
-def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Position], int], fun_h: Callable[[Position, Position], int], **kwarg) -> Path:
+def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Position], int], fun_h: Callable[[Position, Position], int], **kwarg) -> SearchResult:
     """
     ## arguments
     `g`: grafo do tipo Graph
@@ -70,4 +70,8 @@ def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Nod
                     
         return _greedy_search(next_node)
 
-    return get_path(_greedy_search(root))
+    last_node: Node | None = _greedy_search(root)
+    path: Path = get_path(last_node)
+    path_cost = last_node.g if last_node is not None else 0
+
+    return (start, end, path, path_cost, count_visited, count_visited)

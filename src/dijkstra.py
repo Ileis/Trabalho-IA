@@ -2,9 +2,9 @@ from typing import Callable
 from Graph import Graph
 from Node import Node
 from Heap import Heap
-from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path
+from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path, SearchResult
 
-def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node, Position], int], **kwargs) -> Path:
+def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node, Position], int], **kwargs) -> SearchResult:
     """
     ## arguments
     `g`: grafo do tipo Graph
@@ -74,4 +74,8 @@ def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node,
 
         return _dijkstra(heap.extract_head())
 
-    return get_path(_dijkstra(root))
+    last_node: Node | None = _dijkstra(root)
+    path: Path = get_path(last_node)
+    path_cost = last_node.g if last_node is not None else 0
+
+    return (start, end, path, path_cost, count_generated, count_visited)
