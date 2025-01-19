@@ -16,7 +16,7 @@ def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Nod
     `parent_node`: printa o no pai da chamada recursiva
     `neighbors`: printa os vizinhos descubertos na busca
     """
-    root: Node = Node(start, g.get_moves(start))
+    root: Node = Node(start, g.get_moves(start), None, 0, fun_h(start, end))
     visited: list[list[bool]] = init_visited(g.size)
     call: int = 1
     count_visited: int = 0

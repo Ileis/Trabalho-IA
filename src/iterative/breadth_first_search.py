@@ -26,11 +26,11 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
     count_generated: int = 0
 
     queue.append(root)
-    r = None
+    current_node = None
 
     while len(queue) > 0:
 
-        r = queue.popleft()
+        current_node = queue.popleft()
 
         # debug: recursive call layer 
         if kwargs.get("it"):
@@ -38,27 +38,27 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
 
         # debug: parent node
         if kwargs.get("parent_node"):
-            print(f"parent_node: {r}")
+            print(f"parent_node: {current_node}")
 
         # inicio do algoritmo
-        if r is None:
+        if current_node is None:
             break
 
-        set_visited(visited, r.position)
+        set_visited(visited, current_node.position)
         count_visited += 1
 
-        if r.position == end:
+        if current_node.position == end:
             break
 
         it += 1
 
         # set neighbors
-        for move in r.moves:
-            neighbor_position: Position = sum_position(r.position, move)
-            g_cost: int = fun_cost(r, neighbor_position) + r.g
+        for move in current_node.moves:
+            neighbor_position: Position = sum_position(current_node.position, move)
+            g_cost: int = fun_cost(current_node, neighbor_position) + current_node.g
             
             if not is_visited(visited, neighbor_position):
-                neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, g_cost)
+                neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), current_node, g_cost)
                 queue.append(neighbor_node)
                 count_generated += 1
 
@@ -71,7 +71,7 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
             print("(" + ", ".join(f"{x:values}" for x in queue) + ")")
 
 
-    last_node: Node | None = r
+    last_node: Node | None = current_node
     path: Path = get_path(last_node)
     path_cost = last_node.g if last_node is not None else 0
 

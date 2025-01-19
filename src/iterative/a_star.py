@@ -19,7 +19,7 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
     `structure_neighbors`: printa a estrutura em que os nós descubertos estão guardados
     """
 
-    root: Node = Node(start, g.get_moves(start))
+    root: Node = Node(start, g.get_moves(start), None, 0, fun_h(start, end))
     visited: list[list[bool]] = init_visited(g.size)
     heap: Heap[Node] = Heap(lambda x, y: (x.h + x.g) <= (y.h + y.g))
     it: int = 1
@@ -27,11 +27,11 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
     count_generated: int = 0
 
     heap.insert(root)
-    r = None
+    current_node = None
 
     while not heap.is_empty():
 
-        r = heap.extract_head()
+        current_node = heap.extract_head()
 
         # debug: recursive call layer 
         if kwargs.get("it"):
@@ -39,28 +39,28 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
         
         # debug: parent node
         if kwargs.get("parent_node"):
-            print(f"parent_node: {r}")
+            print(f"parent_node: {current_node}")
 
         # inicio do algoritmo
-        if r is None:
+        if current_node is None:
             break
 
-        set_visited(visited, r.position)
+        set_visited(visited, current_node.position)
         count_visited += 1
 
-        if r.position == end:
+        if current_node.position == end:
             break
 
         it += 1
 
         # set neighbors
-        for move in r.moves:
-            neighbor_position: Position = sum_position(r.position, move)
-            g_cost: int = fun_g(r, neighbor_position) + r.g
+        for move in current_node.moves:
+            neighbor_position: Position = sum_position(current_node.position, move)
+            g_cost: int = fun_g(current_node, neighbor_position) + current_node.g
             h_cost: int = fun_h(neighbor_position, end)
             
             if not is_visited(visited, neighbor_position):
-                neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, g_cost, h_cost)
+                neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), current_node, g_cost, h_cost)
                 heap.insert(neighbor_node)
                 count_generated += 1
 
@@ -73,7 +73,7 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
             print("(" + ", ".join(f"{x:values}" for x in heap) + ")")
 
 
-    last_node: Node | None = r
+    last_node: Node | None = current_node
     path: Path = get_path(last_node)
     path_cost = last_node.g if last_node is not None else 0
 
