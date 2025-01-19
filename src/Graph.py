@@ -1,12 +1,16 @@
 from utils.algorithm import Moves
-
+import random
 class Graph:
 
     size: int
-
+    rand: bool 
     def __init__(self, size: int) -> None:
+        self.rand = False
         self.size = size
     
+    def set_random(self, rand: bool) -> None:
+        self.rand: bool = rand
+
     def get_moves(self, pos: tuple[int, int]) -> list[tuple[int, int]]:
         output: list[tuple[int, int]] = list()
 
@@ -25,5 +29,9 @@ class Graph:
         # f4: right
         if pos[1] < (self.size - 1):
             output.append(Moves.RIGHT.value)
-
+        
+        if self.rand:
+            random.shuffle(output)
+        
         return output
+ 
