@@ -3,7 +3,7 @@ from Graph import Graph
 from Node import Node
 from utils.algorithm import Position, Path, init_table, sum_position, is_true, set_true, get_path, SearchResult
 
-def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Position], int], fun_h: Callable[[Position, Position], int], **kwarg) -> SearchResult:
+def greedy_search(g: Graph, start: Position, end: Position, fun_h: Callable[[Position, Position], int], **kwarg) -> SearchResult:
     """
     ## arguments
     `g`: grafo do tipo Graph
@@ -53,11 +53,10 @@ def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Nod
         next_node: Node | None = None
         for move in r.moves:
             neighbor_position: Position = sum_position(r.position, move)
-            g_cost: int = fun_g(r, neighbor_position) + r.g
             h_cost: int = fun_h(neighbor_position, end)
             
             if not is_true(visited, neighbor_position):
-                neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, g_cost, h_cost)
+                neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, 0, h_cost)
 
                 # debug: generated neighbors
                 if kwarg.get("neighbors"):
