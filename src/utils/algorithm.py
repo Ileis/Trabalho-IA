@@ -3,20 +3,26 @@ from enum import Enum
 from Node import Node
 
 Position = tuple[int, int]
-# Position[0]: int = coordenada x da posicao
-# Position[1]: int = coordenada y da posicao
+"""
+Position[0]: int = coordenada x da posicao
+Position[1]: int = coordenada y da posicao
+"""
 
 Path = list[Position]
-# Path = lista de posicoes p_0, p_1, ..., p_n onde p_0 eh o estado inicial
-#        e p_n eh o objetivo da busca
+"""
+Path = lista de posicoes p_0, p_1, ..., p_n onde p_0 eh o estado inicial
+    e p_n eh o objetivo da busca
+"""
 
 SearchResult = tuple[Position, Position, Path, int, int, int]
-# SearchResult[0]: Position = Estado Inicial.
-# SearchResult[1]: Position = Objetivo de Busca.
-# SearchResult[2]: Path     = Caminho encontrado.
-# SearchResult[3]: int      = Custo do caminho encontrado.
-# SearchResult[4]: int      = Quantidade de nos que foram gerados na busca.
-# SearchResult[5]: int      = Quantidade de nos que foram visitados na busca.
+"""
+- `SearchResult[0]: Position` = Estado Inicial.
+- `SearchResult[1]: Position` = Objetivo de Busca.
+- `SearchResult[2]: Path`     = Caminho encontrado.
+- `SearchResult[3]: int`      = Custo do caminho encontrado.
+- `SearchResult[4]: int`      = Quantidade de nos que foram gerados na busca.
+- `SearchResult[5]: int`      = Quantidade de nos que foram visitados na busca.
+"""
 
 class Moves(Enum):
     UP = (1, 0)

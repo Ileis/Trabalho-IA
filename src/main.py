@@ -21,7 +21,7 @@ def main() -> None:
     # start = (3, 12)
     # end = (2, 24)
 
-    for i in range(10):
+    for i in range(1):
         start = random_pos()
         end = random_pos()
         print("start:" if i == 0 else "\nstart:", start)
@@ -29,10 +29,10 @@ def main() -> None:
         # print(breadth_first_search(graph, start, end, cost_1))
         # print(depth_first_search(graph, start, end, cost_1))
         # print(greedy_search(graph, start, end, cost_1, man))
-        print("dijkstra:")
-        print(dijkstra(graph, start, end, cost_1))
-        print("iterative A*:")
-        print(it_a_star(graph, start, end, cost_1, euc))
+        # print("dijkstra:")
+        print(dijkstra(graph, start, end, cost_1, it=True, parent_node=True, neighbors=True, structure_neighbors=True))
+        # print("iterative A*:")
+        # print(it_a_star(graph, start, end, cost_1, euc))
         
     # print(breadth_first_search(graph, start, end, cost_1))
 
