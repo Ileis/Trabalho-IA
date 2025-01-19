@@ -7,7 +7,7 @@ class Node:
     h: int
     tag: str
     
-    def __init__(self, position: tuple[int, int], moves: list[tuple[int, int]], parent:'Node | None' = None, g: int = 10, h: int = 0, **kwargs) -> None:
+    def __init__(self, position: tuple[int, int], moves: list[tuple[int, int]], parent:'Node | None' = None, g: int = 0, h: int = 0, **kwargs) -> None:
         self.parent = parent
         self.position = position
         self.moves = moves

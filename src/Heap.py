@@ -27,6 +27,9 @@ class Heap(Generic[T]):
         self.compare = compare
         self.capacity = 1000
 
+    def is_empty(self) -> bool:
+        return True if len(self.harr) == 0 else False
+
     def parent(self, i: int) -> int:
         return (i - 1) // 2
     
