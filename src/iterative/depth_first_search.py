@@ -22,7 +22,7 @@ def depth_first_search(g: Graph, start: Position, end: Position, func_cost: Call
     stack: list[Node] = list()
     it: int = 1
     count_visited: int = 0
-    count_generated: int = 0
+    count_generated: int = 1
 
     stack.append(root)
     current_node = None

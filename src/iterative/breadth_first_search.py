@@ -23,7 +23,7 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
     queue: deque[Node] = deque()
     it: int = 1
     count_visited: int = 0
-    count_generated: int = 0
+    count_generated: int = 1
 
     queue.append(root)
     current_node = None

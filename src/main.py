@@ -9,7 +9,7 @@ from recursive.a_star import a_star as r_a_star
 from iterative.a_star import a_star as it_a_star
 from recursive.greedy_search import greedy_search
 
-SIZE: int = 15
+SIZE: int = 4
 sys.setrecursionlimit(5000)
 
 def random_pos() -> tuple[int, int]:
@@ -30,9 +30,10 @@ def main() -> None:
         # print(depth_first_search(graph, start, end, cost_1))
         # print(greedy_search(graph, start, end, cost_1, man))
         print("dijkstra:")
-        print(dijkstra(graph, start, end, cost_1))
-        print("iterative A*:")
-        print(it_a_star(graph, start, end, cost_1, man))
+        print(dijkstra(graph, start, end, cost_1, it=True, parent_node=True, neighbors=True, structure_neighbors=True))
+        print("=" * 50)
+        # print("iterative A*:")
+        # print(it_a_star(graph, start, end, cost_1, man))
         
     # print(breadth_first_search(graph, start, end, cost_1))
 

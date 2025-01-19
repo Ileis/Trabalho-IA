@@ -24,7 +24,7 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
     heap: Heap[Node] = Heap(lambda x, y: (x.h + x.g) <= (y.h + y.g))
     call: int = 1
     count_visited: int = 0
-    count_generated: int = 0
+    count_generated: int = 1
 
     def _a_star(r: Node | None) -> Node | None:
         # variaveis usadas da funcao exterior

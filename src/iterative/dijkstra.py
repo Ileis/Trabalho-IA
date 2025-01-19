@@ -23,7 +23,7 @@ def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node,
     heap: Heap[Node] = Heap(lambda x, y: x.g <= y.g)
     it: int = 1
     count_visited: int = 0
-    count_generated: int = 0
+    count_generated: int = 1
 
     heap.insert(root)
     current_node = None

@@ -23,7 +23,7 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
     queue: deque[Node] = deque()
     call: int = 1
     count_visited: int = 0
-    count_generated: int = 0
+    count_generated: int = 1
 
     def _breadth_first_search(r: Node) -> Node | None:
         # variaveis usadas da funcao exterior
@@ -57,10 +57,10 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
         # set neighbors
         for move in r.moves:
             neighbor_position: Position = sum_position(r.position, move)
-            h_cost: int = fun_cost(r, neighbor_position) + r.h
+            g_cost: int = fun_cost(r, neighbor_position) + r.g
             
             if not is_visited(visited, neighbor_position):
-                neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, h_cost)
+                neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, g_cost)
                 queue.append(neighbor_node)
                 count_generated += 1
 
