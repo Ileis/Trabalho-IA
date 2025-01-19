@@ -36,13 +36,13 @@ def sum_position(t1: Position, t2: Position) -> Position:
 def diff_position(t1: Position, t2:Position) -> Position:
     return (fst(t1) - fst(t2), scd(t1) - scd(t2))
 
-def is_visited(table_visited: list[list[bool]], t: Position) -> bool:
+def is_true(table_visited: list[list[bool]], t: Position) -> bool:
     return table_visited[fst(t)][scd(t)]
 
-def set_visited(visited: list[list[bool]], pos: Position) -> None:
+def set_true(visited: list[list[bool]], pos: Position) -> None:
     visited[fst(pos)][scd(pos)] = True
 
-def init_visited(size: int) -> list[list[bool]]:
+def init_table(size: int) -> list[list[bool]]:
     return [[False for _ in range(size)] for _ in range(size)]
 
 def get_path(n: Node | None) -> Path:

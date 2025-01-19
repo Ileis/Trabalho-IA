@@ -1,7 +1,7 @@
 from typing import Callable
 from Graph import Graph
 from Node import Node
-from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path, SearchResult
+from utils.algorithm import Position, Path, init_table, sum_position, is_true, set_true, get_path, SearchResult
 
 def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Position], int], fun_h: Callable[[Position, Position], int], **kwarg) -> SearchResult:
     """
@@ -17,7 +17,7 @@ def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Nod
     `neighbors`: printa os vizinhos descubertos na busca
     """
     root: Node = Node(start, g.get_moves(start), None, 0, fun_h(start, end))
-    visited: list[list[bool]] = init_visited(g.size)
+    visited: list[list[bool]] = init_table(g.size)
     call: int = 1
     count_visited: int = 0
 
@@ -40,7 +40,7 @@ def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Nod
         if r is None:
             return r
 
-        set_visited(visited, r.position)
+        set_true(visited, r.position)
         count_visited += 1
             
         if r.position == end:
@@ -55,7 +55,7 @@ def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Nod
             g_cost: int = fun_g(r, neighbor_position) + r.g
             h_cost: int = fun_h(neighbor_position, end)
             
-            if not is_visited(visited, neighbor_position):
+            if not is_true(visited, neighbor_position):
                 neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, g_cost, h_cost)
 
                 # debug: generated neighbors

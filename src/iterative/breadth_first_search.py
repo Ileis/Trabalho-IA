@@ -2,7 +2,7 @@ from typing import Callable
 from collections import deque
 from Graph import Graph
 from Node import Node
-from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path, SearchResult
+from utils.algorithm import Position, Path, init_table, sum_position, is_true, set_true, get_path, SearchResult
 
 def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node, Position], int], **kwargs) -> SearchResult:
     """
@@ -19,7 +19,8 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
     """
 
     root: Node = Node(start, g.get_moves(start))
-    visited: list[list[bool]] = init_visited(g.size)
+    visited: list[list[bool]] = init_table(g.size)
+    generated: list[list[bool]] = init_table(g.size)
     queue: deque[Node] = deque()
     it: int = 1
     count_visited: int = 0
@@ -44,7 +45,7 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
         if current_node is None:
             break
 
-        set_visited(visited, current_node.position)
+        set_true(visited, current_node.position)
         count_visited += 1
 
         if current_node.position == end:
@@ -57,9 +58,10 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
             neighbor_position: Position = sum_position(current_node.position, move)
             g_cost: int = fun_cost(current_node, neighbor_position) + current_node.g
             
-            if not is_visited(visited, neighbor_position):
+            if not (is_true(visited, neighbor_position) or is_true(generated, neighbor_position)):
                 neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), current_node, g_cost)
                 queue.append(neighbor_node)
+                set_true(generated, neighbor_position)
                 count_generated += 1
 
                 # debug: generated neighbors

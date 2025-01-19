@@ -27,12 +27,12 @@ def main() -> None:
         print("start:" if i == 0 else "\nstart:", start)
         print("end:", end, end="\n\n")
         print(breadth_first_search(graph, start, end, cost_1))
-        print(depth_first_search(graph, start, end, cost_1))
+        # print(depth_first_search(graph, start, end, cost_1))
         # print(greedy_search(graph, start, end, cost_1, man))
         # print("dijkstra:")
         # print(dijkstra(graph, start, end, cost_1))
-        # print("iterative A*:")
-        # print(it_a_star(graph, start, end, cost_1, man))
+        print("iterative A*:")
+        print(it_a_star(graph, start, end, cost_1, man))
         
     # print(breadth_first_search(graph, start, end, cost_1))
 
