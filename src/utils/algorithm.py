@@ -24,14 +24,6 @@ class Moves(Enum):
     DOWN = (-1, 0)
     LEFT = (0, -1)
 
-def reduce(fun, l) -> int:
-    acc = 0
-
-    for i in l:
-        acc += fun(i)
-
-    return acc
-
 def fst(t: Position) -> int:
     return t[0]
 
