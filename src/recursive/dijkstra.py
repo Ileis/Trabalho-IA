@@ -20,7 +20,7 @@ def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node,
 
     root: Node = Node(start, g.get_moves(start))
     visited: list[list[bool]] = init_table(g.size)
-    heap: Heap[Node] = Heap(lambda x, y: x.g <= y.g)
+    heap: Heap[Node] = Heap(lambda x, y: (x.g) <= (y.g))
     call: int = 1
     count_visited: int = 0
     count_generated: int = 1
