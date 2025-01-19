@@ -11,7 +11,7 @@ def depth_first_search(g: Graph, start: Position, end: Position, func_cost: Call
     `end`: posicao final
     `fun_cost`: funcao de custo
     ## **kwargs
-    `call`: printa a camada da chamada recursiva
+    `it`: printa o numero da iteracao
     `parent_node`: printa o no pai da chamada recursiva
     `neighbors`: printa os vizinhos descubertos na busca
     `structure_neighbors`: printa a estrutura em que os nós descubertos estão guardados

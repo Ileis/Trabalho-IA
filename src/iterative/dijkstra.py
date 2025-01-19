@@ -4,14 +4,13 @@ from Node import Node
 from Heap import Heap
 from utils.algorithm import Position, Path, init_visited, sum_position, is_visited, set_visited, get_path, SearchResult
 
-def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Position], int], fun_h: Callable[[Position, Position], int], **kwargs) -> SearchResult:
+def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node, Position], int], **kwargs) -> SearchResult:
     """
     ## arguments
     `g`: grafo do tipo Graph
     `start`: posicao inicial
     `end`: posicao final
-    `fun_g`: funcao de custo
-    `fun_h`: funcao heuristica
+    `fun_cost`: funcao de custo
     ## **kwargs
     `it`: printa o numero da iteracao
     `parent_node`: printa o no pai da chamada recursiva
@@ -21,7 +20,7 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
 
     root: Node = Node(start, g.get_moves(start))
     visited: list[list[bool]] = init_visited(g.size)
-    heap: Heap[Node] = Heap(lambda x, y: (x.h + x.g) <= (y.h + y.g))
+    heap: Heap[Node] = Heap(lambda x, y: x.g <= y.g)
     it: int = 1
     count_visited: int = 0
     count_generated: int = 0
@@ -33,10 +32,10 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
 
         r = heap.extract_head()
 
-        # debug: recursive call layer 
+        # debug: recursive call layer
         if kwargs.get("it"):
             print(f"it {it}" if it <= 1 else f"\nit {it}")
-        
+
         # debug: parent node
         if kwargs.get("parent_node"):
             print(f"parent_node: {r}")
@@ -56,11 +55,10 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
         # set neighbors
         for move in r.moves:
             neighbor_position: Position = sum_position(r.position, move)
-            g_cost: int = fun_g(r, neighbor_position) + r.g
-            h_cost: int = fun_h(neighbor_position, end)
+            g_cost: int = fun_cost(r, neighbor_position) + r.g
             
             if not is_visited(visited, neighbor_position):
-                neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, g_cost, h_cost)
+                neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, g_cost)
                 heap.insert(neighbor_node)
                 count_generated += 1
 
@@ -71,7 +69,6 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
         # debug: structure neighbors
         if kwargs.get("structure_neighbors"):
             print("(" + ", ".join(f"{x:values}" for x in heap) + ")")
-
 
     last_node: Node | None = r
     path: Path = get_path(last_node)
