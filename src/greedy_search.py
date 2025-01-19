@@ -19,12 +19,14 @@ def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Nod
     root: Node = Node(start, g.get_moves(start))
     visited: list[list[bool]] = init_visited(g.size)
     call: int = 1
+    count_visited: int = 0
 
     def _greedy_search(r: Node | None) -> Node | None:
         # variaveis usadas da funcao exterior 
         nonlocal visited
         nonlocal end
         nonlocal call
+        nonlocal count_visited
 
         # debug: recursive call layer 
         if kwarg.get("call"):
@@ -39,6 +41,7 @@ def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Nod
             return r
 
         set_visited(visited, r.position)
+        count_visited += 1
             
         if r.position == end:
             return r

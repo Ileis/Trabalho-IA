@@ -22,6 +22,8 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
     visited: list[list[bool]] = init_visited(g.size)
     queue: deque[Node] = deque()
     call: int = 1
+    count_visited: int = 0
+    count_generated: int = 0
 
     def _breadth_first_search(r: Node) -> Node | None:
         # variaveis usadas da funcao exterior
@@ -29,6 +31,8 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
         nonlocal queue
         nonlocal end
         nonlocal call
+        nonlocal count_visited
+        nonlocal count_generated
 
         # debug: recursive call layer 
         if kwargs.get("call"):
@@ -43,6 +47,7 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
             return r
 
         set_visited(visited, r.position)
+        count_visited += 1
 
         if r.position == end:
             return r
@@ -57,6 +62,7 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
             if not is_visited(visited, neighbor_position):
                 neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, h_cost)
                 queue.append(neighbor_node)
+                count_generated += 1
 
                 # debug: generated neighbors
                 if kwargs.get("neighbors"):
