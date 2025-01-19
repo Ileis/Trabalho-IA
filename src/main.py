@@ -7,7 +7,7 @@ from dijkstra import dijkstra
 from a_star import a_star
 from greedy_search import greedy_search
 
-SIZE: int = 30
+SIZE: int = 31
 
 def random_pos() -> tuple[int, int]:
     return (random.randint(0, SIZE - 1), random.randint(0, SIZE - 1))
@@ -21,17 +21,19 @@ def main() -> None:
     print("start:", start)
     print("end:", end, end="\n\n")
 
-    print("euclides")
-    print(greedy_search(graph, start, end, cost_1, euc))
-    print(greedy_search(graph, start, end, cost_2, euc))
-    print(greedy_search(graph, start, end, cost_3, euc))
-    print(greedy_search(graph, start, end, cost_4, euc))
+    print(a_star(graph, start, end, cost_1, euc, neighbors=True, call=True, parent_node=True, structure_neighbors=True))
 
-    print("manhattan")
-    print(greedy_search(graph, start, end, cost_1, man))
-    print(greedy_search(graph, start, end, cost_2, man))
-    print(greedy_search(graph, start, end, cost_3, man))
-    print(greedy_search(graph, start, end, cost_4, man))
+    # print("euclides")
+    # print(greedy_search(graph, start, end, cost_1, euc))
+    # print(greedy_search(graph, start, end, cost_2, euc))
+    # print(greedy_search(graph, start, end, cost_3, euc))
+    # print(greedy_search(graph, start, end, cost_4, euc))
+
+    # print("manhattan")
+    # print(greedy_search(graph, start, end, cost_1, man))
+    # print(greedy_search(graph, start, end, cost_2, man))
+    # print(greedy_search(graph, start, end, cost_3, man))
+    # print(greedy_search(graph, start, end, cost_4, man))
 
 
 if __name__ == '__main__':

@@ -21,19 +21,28 @@ def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Nod
     call: int = 1
 
     def _greedy_search(r: Node | None) -> Node | None:
+        # variaveis usadas da funcao exterior 
         nonlocal visited
         nonlocal end
         nonlocal call
 
+        # debug: recursive call layer 
         if kwarg.get("call"):
             print(f"call {call}" if call <= 1 else f"\ncall {call}")
 
         call += 1
 
+        # debug: parent node
         if kwarg.get("parent_node"):
             print(f"parent_node: {r}")
 
-        if r is None or r.position == end:
+        # inicio do algoritmo
+        if r is None:
+            return r
+
+        set_visited(visited, r.position)
+            
+        if r.position == end:
             return r
 
         # set neighbors
@@ -44,9 +53,9 @@ def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Nod
             h_cost: int = fun_h(neighbor_position, end)
             
             if not is_visited(visited, neighbor_position):
-                set_visited(visited, neighbor_position)
                 neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, g_cost, h_cost)
 
+                # debug: generated neighbors
                 if kwarg.get("neighbors"):
                     print(neighbor_node)
 

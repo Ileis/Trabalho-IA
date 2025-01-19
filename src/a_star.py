@@ -25,20 +25,29 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
     call: int = 1
 
     def _a_star(r: Node | None) -> Node | None:
+        # variaveis usadas da funcao exterior
         nonlocal visited
         nonlocal heap
         nonlocal end
         nonlocal call
 
+        # debug: recursive call layer 
         if kwargs.get("call"):
             print(f"call {call}" if call <= 1 else f"\ncall {call}")
         
         call += 1
 
+        # debug: parent node
         if kwargs.get("parent_node"):
             print(f"parent_node: {r}")
 
-        if r is None or r.position == end:
+        # inicio do algoritmo
+        if r is None:
+            return r
+
+        set_visited(visited, r.position)
+
+        if r.position == end:
             return r
 
         # set neighbors
@@ -48,13 +57,14 @@ def a_star(g: Graph, start: Position, end: Position, fun_g: Callable[[Node, Posi
             h_cost: int = fun_h(neighbor_position, end)
             
             if not is_visited(visited, neighbor_position):
-                set_visited(visited, neighbor_position)
                 neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, g_cost, h_cost)
                 heap.insert(neighbor_node)
 
+                # debug: generated neighbors
                 if kwargs.get("neighbors"):
                     print(neighbor_node)
 
+        # debug: structure neighbors
         if kwargs.get("structure_neighbors"):
             print("(" + ", ".join(f"{x:values}" for x in heap) + ")")
 

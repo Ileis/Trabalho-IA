@@ -23,20 +23,29 @@ def depth_first_search(g: Graph, start: Position, end: Position, func_cost: Call
     call: int = 1
 
     def _depth_first_search(r: Node) -> Node | None:
+        # variaveis usadas da funcao exterior
         nonlocal visited
         nonlocal stack
         nonlocal end
         nonlocal call
 
+        # debug: recursive call layer 
         if kwargs.get("call"):
             print(f"call {call}" if call <= 1 else f"\ncall {call}")
 
         call += 1
 
+        # debug: parent node
         if kwargs.get("parent_node"):
             print(f"parent_node: {r}")
 
-        if r is None or r.position == end:
+        # inicio do algoritmo
+        if r is None:
+            return r
+        
+        set_visited(visited, r.position)
+
+        if r.position == end:
             return r
 
         # set neighbors
@@ -45,13 +54,14 @@ def depth_first_search(g: Graph, start: Position, end: Position, func_cost: Call
             h_cost: int = func_cost(r, neighbor_position) + r.h
 
             if not is_visited(visited, neighbor_position):
-                set_visited(visited, neighbor_position)
                 neighbor_node: Node = Node(neighbor_position, g.get_moves(neighbor_position), r, h_cost)
                 stack.append(neighbor_node)
 
+                # debug: generated neighbors
                 if kwargs.get("neighbors"):
                     print(neighbor_node)
 
+        # debug: structure neighbors
         if kwargs.get("structure_neighbors"):
             print("(" + ", ".join(f"{x:values}" for x in stack) + ")")
            
