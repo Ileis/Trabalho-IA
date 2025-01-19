@@ -4,9 +4,10 @@ class Graph:
 
     size: int
     rand: bool 
+
     def __init__(self, size: int) -> None:
-        self.rand = False
         self.size = size
+        self.rand = False
     
     def set_random(self, rand: bool) -> None:
         self.rand: bool = rand
