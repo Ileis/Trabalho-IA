@@ -33,8 +33,6 @@ def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node,
         # debug: recursive call layer
         if kwargs.get("call"):
             print(f"call {call}" if call <= 1 else f"\ncall {call}")
-        
-        call += 1
 
         # debug: parent node
         if kwargs.get("parent_node"):
@@ -48,6 +46,8 @@ def dijkstra(g: Graph, start: Position, end: Position, fun_cost: Callable[[Node,
 
         if r.position == end:
             return r
+
+        call += 1
 
         # set neighbors
         for move in r.moves:

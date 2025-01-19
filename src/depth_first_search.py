@@ -33,8 +33,6 @@ def depth_first_search(g: Graph, start: Position, end: Position, func_cost: Call
         if kwargs.get("call"):
             print(f"call {call}" if call <= 1 else f"\ncall {call}")
 
-        call += 1
-
         # debug: parent node
         if kwargs.get("parent_node"):
             print(f"parent_node: {r}")
@@ -47,6 +45,8 @@ def depth_first_search(g: Graph, start: Position, end: Position, func_cost: Call
 
         if r.position == end:
             return r
+
+        call += 1
 
         # set neighbors
         for move in r.moves:

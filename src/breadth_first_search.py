@@ -34,8 +34,6 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
         if kwargs.get("call"):
             print(f"call {call}" if call <= 1 else f"\ncall {call}")
 
-        call += 1
-
         # debug: parent node
         if kwargs.get("parent_node"):
             print(f"parent_node: {r}")
@@ -48,6 +46,8 @@ def breadth_first_search(g: Graph, start: Position, end: Position, fun_cost: Cal
 
         if r.position == end:
             return r
+
+        call += 1
 
         # set neighbors
         for move in r.moves:

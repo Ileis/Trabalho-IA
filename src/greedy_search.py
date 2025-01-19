@@ -30,8 +30,6 @@ def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Nod
         if kwarg.get("call"):
             print(f"call {call}" if call <= 1 else f"\ncall {call}")
 
-        call += 1
-
         # debug: parent node
         if kwarg.get("parent_node"):
             print(f"parent_node: {r}")
@@ -44,6 +42,8 @@ def greedy_search(g: Graph, start: Position, end: Position, fun_g: Callable[[Nod
             
         if r.position == end:
             return r
+
+        call += 1
 
         # set neighbors
         next_node: Node | None = None
