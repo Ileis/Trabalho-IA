@@ -1,4 +1,3 @@
-
 A*:
 Inicio: (18, 11) 
 Chegada: (1, 11) 
