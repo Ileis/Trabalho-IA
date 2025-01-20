@@ -22,7 +22,7 @@ def main() -> None:
     # start = (3, 12)
     # end = (2, 24)
     
-    #Gerador pra parte 1
+    # gerador pra parte 1
     '''
     for i in range(50):
         start: tuple[int, int] = start_positions[i]
@@ -41,7 +41,7 @@ def main() -> None:
     for i in range(50):
     '''
 
-#Gerador pra parte 2
+    # gerador pra parte 2
     '''
     for i in range(50):
         start: tuple[int, int] = start_positions[i]
@@ -66,7 +66,7 @@ def main() -> None:
             print("A*:\nInicio:",output[0],"\nChegada:",output[1], "\nCaminho:" ,output[2], "\nCusto:" , output[3], "\nNos Gerados:", output[4],"\nNos Visitados:", output[5],"\nFuncao de Custo:", j+1,"\n", "Heuristica: Manhattan\n")
     '''
 
-#gerador pra parte 3
+    # gerador pra parte 3
     '''
     for i in range(50):
         start: tuple[int, int] = start_positions[i]
@@ -95,7 +95,7 @@ def main() -> None:
             print("A*:\nInicio:",output[0],"\nChegada:",output[1], "\nCaminho:" ,output[2], "\nCusto:" , output[3], "\nNos Gerados:", output[4],"\nNos Visitados:", output[5],"\nFuncao de Custo:", j+1,"\n", "Heuristica: Manhattan\n")
     '''
 
-#Gerador pra Parte 4
+    # gerador pra parte 4
     '''
     graph.set_random(True)
     for i in range (20):
@@ -122,7 +122,7 @@ def main() -> None:
             print("Nos gerados:",output[4],"\nNos visitados:", output[5], "\n")
     '''    
 
-# Gerador pra Parte 5
+    # gerador pra parte 5
     '''
     for i in range(25):
         start: tuple[int, int] = start_positions[i]
