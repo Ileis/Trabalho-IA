@@ -41,12 +41,8 @@ def main() -> None:
     for i in range(50):
     '''
 
-
-
-
-
 #Gerador pra parte 2
-'''
+    '''
     for i in range(50):
         start: tuple[int, int] = start_positions[i]
         end: tuple[int, int] = end_positions[i]
@@ -68,15 +64,10 @@ def main() -> None:
         for j in range(4):
             output = a_star(graph, start, end, costs(j+1),man)
             print("A*:\nInicio:",output[0],"\nChegada:",output[1], "\nCaminho:" ,output[2], "\nCusto:" , output[3], "\nNos Gerados:", output[4],"\nNos Visitados:", output[5],"\nFuncao de Custo:", j+1,"\n", "Heuristica: Manhattan\n")
-            '''
-
-
-
-
-
+    '''
 
 #gerador pra parte 3
-'''
+    '''
     for i in range(50):
         start: tuple[int, int] = start_positions[i]
         end: tuple[int, int] = end_positions[i]
@@ -102,11 +93,10 @@ def main() -> None:
         for j in range(4):
             output = a_star(graph, start, end, costs(j+1),man)
             print("A*:\nInicio:",output[0],"\nChegada:",output[1], "\nCaminho:" ,output[2], "\nCusto:" , output[3], "\nNos Gerados:", output[4],"\nNos Visitados:", output[5],"\nFuncao de Custo:", j+1,"\n", "Heuristica: Manhattan\n")
-'''
-
+    '''
 
 #Gerador pra Parte 4
-'''
+    '''
     graph.set_random(True)
     for i in range (20):
         start = start_positions[i]
@@ -130,10 +120,10 @@ def main() -> None:
                 output = dfs(graph, start, end, costs(k+1))
                 print ("Funcao de Custo:",k+1,":",output[3])
             print("Nos gerados:",output[4],"\nNos visitados:", output[5], "\n")
-'''    
+    '''    
 
 # Gerador pra Parte 5
-'''
+    '''
     for i in range(25):
         start: tuple[int, int] = start_positions[i]
         end: tuple[int, int] = end_positions[i]
@@ -149,12 +139,6 @@ def main() -> None:
             output_2[2].pop(0)
             print("Inicio:", output_1[0],"\nChegada:", output_2[1],"\nPontos de Interesse:",interest_positions[i], "\nCaminho:", output_1[2] + output_2[2],"\nCusto:", output_1[3] + output_2[3],"\nNos Expandidos:", output_1[4] + output_2[4],"\nNos Visitados:", output_1[5] + output_2[5],"\nFuncao de Custo:",j+1,"\n")
     '''
-
-
-
-
-
-
 
 if __name__ == '__main__':
     main()
