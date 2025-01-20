@@ -113,3 +113,5 @@ def costs(i:int) -> Callable[[Node, Position], int]:
     else:
         return cost_4
     
+def interest_cost(position: Position, start: Position, end: Position,h: Callable[[Position,Position], int]) -> int:
+    return h(position, start) + h(position, end)
