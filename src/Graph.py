@@ -1,5 +1,6 @@
 from utils.algorithm import Moves
 import random
+
 class Graph:
 
     size: int
