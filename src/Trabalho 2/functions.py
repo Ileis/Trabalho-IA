@@ -1,9 +1,9 @@
 import random
 import math
 
-MUTATION_RATE = 0.05 # Taxa de mutação
+MUTATION_RATE = 0.1 # Taxa de mutação
 CROSSOVER_RATE = 0.75 # Taxa de crossover
-GENERATIONS = 300 #Total de gerações
+GENERATIONS = 50 #Total de gerações
 
 
 def random_distance_matrix(lenght):
@@ -22,6 +22,9 @@ def random_distance_matrix(lenght):
 
 def random_flow_matrix(lenght):
     flow_matrix = [[random.randint(0,2*lenght) for _ in range(lenght)] for _ in range(lenght)]
+    #debug matrix para testar consistência
+    #flow_matrix = [[1 for _ in range(lenght)] for _ in range(lenght)]
+    
     return flow_matrix
 
 def euclidian_distance(point1, point2):
@@ -54,9 +57,11 @@ def elitism_selection(population, fitness_values):
     #Seleção do melhor genoma
     best_fitness = min(fitness_values)
     best_genome = population[fitness_values.index(best_fitness)]
+    population.remove(best_genome)
+    fitness_values.remove(best_fitness) 
     return best_genome
 
-def tournament_selection(population, fitness_values, tournament_size=3):
+def tournament_selection(population, fitness_values, tournament_size=5):
     #Seleção de um genoma por torneio, onde N genomas são escolhidos aleatoriamente e o melhor é selecionado, troque o tournament size na função pra modificar o tamanho do torneio
     tournament = random.sample(list (fitness_values), tournament_size)
     winner = min(tournament)
@@ -128,6 +133,19 @@ def reverse_mutation(genome):
     genome[start:end] = reversed(genome[start:end])
     return genome
 
+def no_elitism(population, fitness_values, new_population):
+    return new_population
+
+def elitism(population, fitness_values, new_population, elitism_size=20):
+    #Elitismo, onde nós mantemos os melhores genomas da geração anterior
+        #Ordenamos a nova população por fitness e removemos os genomas excedentes aka os piores
+        for i in range(elitism_size):
+            new_population.append(population[i])
+        while len(new_population) > len(population):
+            new_population.pop()
+        #Embaralhamos de novo a fim de garantir diversidade
+        random.shuffle(new_population)
+        return new_population
 #Mutação genérica, onde nós aleatóriamente decidimos se vamos fazer a mutação ou não
 def mutate(genome, mutation_type):
     if random.random() < MUTATION_RATE:
@@ -137,7 +155,7 @@ def mutate(genome, mutation_type):
 
 
 #Função principal do algoritmo genético, é aqui que a mágica acontece
-def genetic_algorithm(population_size, genome_length, distance_matrix, flow_matrix, selection_type,mutation_type,crossover_type):
+def genetic_algorithm(population_size, genome_length, distance_matrix, flow_matrix, selection_type,mutation_type,crossover_type,elitism_type):
     population = init_population(population_size, genome_length) 
     fitness_values = [fitness(genome, distance_matrix, flow_matrix) for genome in population]
     for generation in range(GENERATIONS): #Iterar sobre as gerações
@@ -148,17 +166,9 @@ def genetic_algorithm(population_size, genome_length, distance_matrix, flow_matr
             child1, child2 = crossover(parent1, parent2,crossover_type)
             new_population.append(mutate(child1,mutation_type))
             new_population.append(mutate(child2,mutation_type))
-            #Optamos por adicionar os pais na nova geração, para garantir que os melhores genoma não sejam perdidos
-            if(child1 != parent1):
-                new_population.append(parent1)
-            if(child2 != parent2):
-                new_population.append(parent2)
-        #Ordenamos a nova população por fitness e removemos os genomas excedentes aka os piores
-        new_population.sort(key=lambda genome: fitness(genome, distance_matrix, flow_matrix))
-        while len(new_population) > population_size:
-            new_population.pop()
-        #Embaralhamos de novo a fim de garantir diversidade
-        random.shuffle(new_population)
+        #Organizamos a população pro elitismo
+        population.sort(key=lambda genome: fitness(genome, distance_matrix, flow_matrix))
+        new_population = elitism_type(population, fitness_values,new_population)
         population = new_population
         fitness_values = [fitness(genome, distance_matrix, flow_matrix) for genome in population]
         best_genome = min(fitness_values)
